@@ -16,61 +16,23 @@
 
 #define SERVER_PORT 5050
 
-typedef struct mathopt
-{
-	int oprate;
-	float value1;
-	float value2;
-}mopt;
-
 ******************************************
 //子进程 函数
 ******************************************
 void process_child(int client_socket)
 {
 	char command[20];
-	struct mathopt *mp = (struct mathopt *)command;	
-
-	float result = 0;
+	
 	char sendbuf[1024];
 
 	while(1)
 	{
 		recv(client_socket,command,20,0);
 		
-		//add		
-		if(mp->oprate == 0)
-		{
-			result = mp->value1 + mp->value2;
-		}
-
-		//minus
-		else if(mp->oprate == 1)
-		{
-			result = mp->value1 - mp->value2;
-		}
-
-		//multiply
-		else if(mp->oprate == 2)
-		{
-			result = mp->value1 * mp->value2;
-		}
-
-		//divide
-		else if(mp->oprate == 3)
-		{
-			result = mp->value1 / mp->value2;
-		}
-
-		//quit
-		else if(mp->oprate == 4)
-		{
-			break;
-		}
-
+		//此处为实现功能语句
+		
 		sprintf(sendbuf,"%f",result);
 		send(client_socket,sendbuf,sizeof(sendbuf),0);
-		printf("v1: %f,v2: %f,r: %f\n",mp->value1,mp->value2,result);
 		
 	}//while
 	
