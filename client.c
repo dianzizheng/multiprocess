@@ -44,10 +44,10 @@ int main()
 	{
 		//此处为要实现功能语句
  
-		send(client_socket,(char*)&mp,sizeof(mp),0);
-
+		send(client_socket,(char*)&mp,sizeof(mp),0);     //send
+		
 		sprintf(recvbuf,"%f",result);
-		recv(client_socket,recvbuf,1024,0);
+		recv(client_socket,recvbuf,1024,0);           //recv
 		printf("recv data: %s\n",recvbuf);
 		
 	}//while
