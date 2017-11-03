@@ -16,30 +16,13 @@
 
 #define SERVER_PORT 5050
 
-typedef struct mathopt
-{
-	int oprate;
-	float value1;
-	float value2;
-}mopt;
-
-void opt_count(struct mathopt *pMp)
-{
-	printf("please input the first:");
-	scanf("%f",&(pMp->value1));
-
-	printf("please input the second:");
-	scanf("%f",&(pMp->value2));
-}
-
 int main()
 {
 	int client_socket;
 	
 	struct sockaddr_in clientAddr;
 	struct sockaddr_in serverAddr;
-
-	struct mathopt mp;
+	
 	char command[20];
 	char recvbuf[1024];
 
@@ -59,64 +42,8 @@ int main()
 	}
 	while(1)
 	{
-		printf("Input your word:\n");
-		scanf("%s",command);
-
-		float result = 0;
-
-		//add
-		if(strcmp(command,"add") == 0)
-		{
-			opt_count(&mp);
-			mp.oprate = 0;
-		}
-		
-		//minus
-		else if(strcmp(command,"minus") == 0)
-		{
-			opt_count(&mp);
-			mp.oprate = 1;
-		}
-
-		//multiply
-		else if(strcmp(command,"multiply") == 0)
-		{
-			opt_count(&mp);
-			mp.oprate = 2;
-		}
-
-		//divide
-		else if(strcmp(command,"divide") == 0)
-		{
-			mp.oprate = 3;
-			while(1)
-			{
-				opt_count(&mp);
-				if(mp.value2 == 0)
-				{
-					printf("error: can't identify!\n");
-					continue;
-				}
-				else
-				{		
-					break;
-				}
-			}		
-		}	
-
-		//quit
-		else if(strcmp(command,"quit") == 0)
-		{
-			mp.oprate = 4;
-			break;
-		}
-
-		else	
-		{
-			printf("error!\n");
-			break;
-		}
-
+		//此处为要实现功能语句
+ 
 		send(client_socket,(char*)&mp,sizeof(mp),0);
 
 		sprintf(recvbuf,"%f",result);
